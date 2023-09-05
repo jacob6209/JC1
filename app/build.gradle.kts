@@ -68,5 +68,5 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     // lazzy Staggers
-//    implementation ("com.github.nesyou01:LazyStaggeredGrid:1.2.0")
+    implementation ("androidx.compose.foundation:foundation:1.3.0")
 }

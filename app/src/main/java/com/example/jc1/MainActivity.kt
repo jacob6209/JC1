@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -50,10 +51,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jc1.model.Travel
+import com.example.jc1.ui.screens.DataGrid
 import com.example.jc1.ui.screens.HeaderFilter
 import com.example.jc1.ui.theme.JC1Theme
 import com.example.jc1.ui.screens.HeaderGreating
 import com.example.jc1.ui.screens.HeaderSearchLine
+import com.example.jc1.ui.screens.NavBar
 import com.example.jc1.ui.theme.AppDarkGray
 import com.example.jc1.ui.theme.AppLightGray
 import com.example.jc1.ui.theme.AppRed
@@ -88,10 +91,12 @@ fun MainView() {
         Travel("Rome",200,R.drawable.rome),
         Travel("Hawaii",190,R.drawable.dubai),
         Travel("Tehran",120,R.drawable.tehran),
+        Travel("Bali",150,R.drawable.bali),
+
 
     )
     Scaffold(
-        bottomBar = {}
+        bottomBar = {NavBar()}
     ) {
         Box(
             modifier = Modifier
@@ -104,28 +109,8 @@ fun MainView() {
                 HeaderSearchLine()
                 Spacer(modifier = Modifier.height(10.dp))
                 HeaderFilter()
-                Column(Modifier.fillMaxWidth().padding(25.dp,0.dp,25.dp,0.dp)) {
-                    LazyVerticalStaggeredGrid(columns =StaggeredGridCells.Fixed(2)){
-                        items(travel.size){
-                            Card(modifier = Modifier.fillMaxSize().padding(5.dp),
-                                shape = RoundedCornerShape(15)) {
-                                Box{
-                                    Image(painter = painterResource(id = travel[it].img)
-                                        , contentDescription = travel[it].title,
-                                        modifier = Modifier.fillMaxSize(),
-                                        contentScale = ContentScale.FillWidth
-                                    )
-                                    Text(text = travel[it].title, color = AppWhite,
-                                        modifier = Modifier
-                                            .align(Alignment.BottomStart)
-                                            .padding(bottom = 15.dp, start = 15.dp)
+                DataGrid(travel)
 
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
     }
